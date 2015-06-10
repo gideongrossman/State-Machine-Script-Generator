@@ -4,9 +4,9 @@ from script_generator import *
 reload(a)
 from script_generator import *
 
-
 # Enter the path where you'd like to create .c and .h files
-c_file_path = "C:/Users/Velocitek/Documents/Gideon/Code"
+c_file_path = "C:\Users\Velocitek\Documents\Gideon\Code\Style-Scripts\State-Machine-Script-Generator"
+
 # Enter the name you'd like to call the .c and .h files
 c_filename = "script_generated"
 

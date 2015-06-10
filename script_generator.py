@@ -73,7 +73,10 @@ class script_generator:
         
         header_guard = '#ifndef SM_%s_H\n#define SM_%s_H\n\n' %(self.filename.upper(), self.filename.upper())
         
-        enum_type_definition = 'typedef enum\n{\n  %s_STATE,\n  %s_STATE,\n  %s_STATE,\n}\n' %(capitalized_states[0],capitalized_states[1],capitalized_states[2]) 
+        enum_type_definition = 'typedef enum\n{\n'
+        for state in capitalized_states:
+            enum_type_definition = enum_type_definition + '%s_STATE,\n' %(state)
+        enum_type_definition = enum_type_definition + '}\n'
         
         capitalized_filename_no_underscores = CapitalizeFirstLettersRemoveUnderscores(self.filename)
         f.write(boilerplate_comments)
