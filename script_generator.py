@@ -33,6 +33,14 @@ class script_generator:
         self.authors = authors
         self.states = states
         self.events = events
+    
+    def PrintTransitionStatements(self, state, implementation_file):
+        if self.events[state]:
+            for event in self.events[state]:
+                implementation_file.write('          case ' + event[0].upper() + ' :\n')
+                implementation_file.write('            nextState = ' + event[1].upper() + ';\n            break;\n\n')
+        else:
+            implementation_file.write('        }\n')
         
     def CreateHeaderFile(self):
         f = open('%s/sm_%s.h' %(self.path, self.filename) ,'w')
@@ -102,9 +110,8 @@ class script_generator:
       if (current_event != EV_NO_EVENT)\n\
       {\n        switch (current_event)\n        {\n')
       
-            for event in self.events[state]:
-                g.write('          case ' + event[0].upper() + ' :\n')
-                g.write('            nextState = ' + event[1].upper() + ';\n            break;\n\n')
+            self.PrintTransitionStatements(state, g)
+
             #g.write('          // case EV_EVENT1:\n            // next_state = ;\n            break;\n\n\
             g.write('          default:\n            break;\n        }\n      }\n\n      break;\n\n')
        
