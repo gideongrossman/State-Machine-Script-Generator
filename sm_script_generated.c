@@ -36,11 +36,11 @@ Events RunScriptGeneratedSM(Events current_event)
       {
         switch (current_event)
         {
-          case CHANGE_TO_STATE_2 :
+          case EV_CHANGE_TO_STATE_2 :
             nextState = STATE_2;
             break;
 
-          case CHANGE_TO_STATE_3 :
+          case EV_CHANGE_TO_STATE_3 :
             nextState = STATE_3;
             break;
 
@@ -58,7 +58,7 @@ Events RunScriptGeneratedSM(Events current_event)
       {
         switch (current_event)
         {
-          case CHANGE_TO_STATE_3 :
+          case EV_CHANGE_TO_STATE_3 :
             nextState = STATE_3;
             break;
 
