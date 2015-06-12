@@ -20,7 +20,7 @@ events_file_path = "C:/Users/Velocitek/Documents/Gideon/Code/Style-Scripts/State
 events_filename = "Events_for_master.txt"
 
 # Header files to include
-includes = ['main.h', 'avr_compiler.h', 'shiftLcd.h', 'events.h']
+includes = ['main.h', 'avr_compiler.h', 'shiftLcd.h', 'SMevents.h']
 
 # Generate the .c and .h files with the parameters defined above and in the events .txt file
 script_generator_object = script_generator(events_file_path, events_filename, c_file_path, c_filename, year, authors, states, includes)

@@ -19,7 +19,7 @@ def CapitalizeFirstLettersRemoveUnderscores(word_to_capitalize):
 def PrintPrivateDuringFunctions(h, states):
     h.write('// Private During Functions ' + '-' * 52 + '\n')
     for state in states:
-        h.write('static void During' + CapitalizeFirstLettersRemoveUnderscores(state) + '(Events event)\n')
+        h.write('static void During' + CapitalizeFirstLettersRemoveUnderscores(state) + '(uint8_t event)\n')
         h.write('{\n\n  if (event == EV_ENTRY)\n  {\n\n  }\n')
         h.write('  else if (event == EV_EXIT)\n  {\n\n  }\n')
         h.write('  else\n  {\n\n  }\n}\n\n')
@@ -86,7 +86,7 @@ class script_generator:
         f.write('#include "events.h"\n\n')
         f.write(enum_type_definition)
         f.write(capitalized_filename_no_underscores + 'States;\n\n')
-        f.write('Events Run' + capitalized_filename_no_underscores + 'SM(Events current_event);\n')
+        f.write('uint8_t Run' + capitalized_filename_no_underscores + 'SM(uint8_t current_event);\n')
         f.write('void Start' + capitalized_filename_no_underscores + 'SM(void);\n')
         f.write(capitalized_filename_no_underscores + 'States Query' + capitalized_filename_no_underscores + 'SM(void);\n\n')
         f.write('#endif')
@@ -122,13 +122,13 @@ class script_generator:
         
         g.write('// Module Functions ' + '-' * 60 + '\n')
         for state in self.states:
-            g.write('static void During'+CapitalizeFirstLettersRemoveUnderscores(state) + '(Events event);\n')
+            g.write('static void During'+CapitalizeFirstLettersRemoveUnderscores(state) + '(uint8_t event);\n')
             
         g.write('\n// Module Variables' + '-'*60 + '\n')
         g.write('static ' + CapitalizeFirstLettersRemoveUnderscores(self.filename) + 'States current_' + self.filename + '_state_ = ' + self.states[0].upper() + '_STATE;' + '\n\n')
         
         g.write('// Module Code ' + '-'*65 + '\n')
-        g.write('Events Run' + CapitalizeFirstLettersRemoveUnderscores(self.filename) + 'SM(Events current_event)\n')
+        g.write('uint8_t Run' + CapitalizeFirstLettersRemoveUnderscores(self.filename) + 'SM(uint8_t current_event)\n')
         g.write('{\n  ' + CapitalizeFirstLettersRemoveUnderscores(self.filename) + 'States next_state = current_' + self.filename + '_state_;\n\n')
         g.write('  switch (current_' + self.filename + '_state_)\n  {\n')
         for state in self.states:
@@ -142,7 +142,7 @@ class script_generator:
             g.write('          default:\n            break;\n        }\n      }\n\n      break;\n\n')
        
         g.write('  }\n\n')
-        g.write('  if (current_' + self.filename + '_state_ != next_state)\n  {\n')
+        g.write('  if (next_state != current_' + self.filename + '_state_)\n  {\n')
         g.write('    switch (current_' + self.filename + '_state_)\n    {\n')
         for state in self.states:
             g.write('      case ' + state.upper() + '_STATE' + ':\n        During' + CapitalizeFirstLettersRemoveUnderscores(state) + '(EV_EXIT);\n        break;\n\n')

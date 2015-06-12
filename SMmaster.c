@@ -11,7 +11,7 @@
 #include "main.h"
 #include "avr_compiler.h"
 #include "shiftLcd.h"
-#include "events.h"
+#include "SMevents.h"
 
 #include "SMmaster.h"
 
@@ -19,15 +19,15 @@
 
 
 // Module Functions ------------------------------------------------------------
-static void DuringState1(Events event);
-static void DuringState2(Events event);
-static void DuringState3(Events event);
+static void DuringState1(uint8_t event);
+static void DuringState2(uint8_t event);
+static void DuringState3(uint8_t event);
 
 // Module Variables------------------------------------------------------------
 static MasterStates current_master_state_ = STATE_1_STATE;
 
 // Module Code -----------------------------------------------------------------
-Events RunMasterSM(Events current_event)
+uint8_t RunMasterSM(uint8_t current_event)
 {
   MasterStates next_state = current_master_state_;
 
@@ -101,7 +101,7 @@ Events RunMasterSM(Events current_event)
 
   }
 
-  if (current_master_state_ != next_state)
+  if (next_state != current_master_state_)
   {
     switch (current_master_state_)
     {
@@ -158,7 +158,7 @@ MasterStates QueryMasterSM(void)
 
 
 // Private During Functions ----------------------------------------------------
-static void DuringState1(Events event)
+static void DuringState1(uint8_t event)
 {
 
   if (event == EV_ENTRY)
@@ -175,7 +175,7 @@ static void DuringState1(Events event)
   }
 }
 
-static void DuringState2(Events event)
+static void DuringState2(uint8_t event)
 {
 
   if (event == EV_ENTRY)
@@ -192,7 +192,7 @@ static void DuringState2(Events event)
   }
 }
 
-static void DuringState3(Events event)
+static void DuringState3(uint8_t event)
 {
 
   if (event == EV_ENTRY)

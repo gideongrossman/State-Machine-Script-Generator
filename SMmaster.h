@@ -16,7 +16,7 @@ STATE_3_STATE,
 }
 MasterStates;
 
-Events RunMasterSM(Events current_event);
+uint8_t RunMasterSM(uint8_t current_event);
 void StartMasterSM(void);
 MasterStates QueryMasterSM(void);
 
