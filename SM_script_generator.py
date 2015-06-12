@@ -80,7 +80,8 @@ class SM_script_generator:
         capitalized_states = []
         for state in self.states:
             capitalized_states.append(state.upper())
-        boilerplate_comments = '// Copyright (c) '+self.year+' Velocitek Inc. All rights reserved.\n\
+        boilerplate_comments ='\
+// Copyright (c) '+ self.year +' Velocitek Inc. All rights reserved.\n\
 //\n\
 // Please follow the Velocitek C Style Guide when maintaining this code.\n\
 // http://www.velocitek.com/style-guide/c_style_guide.xml\n\n'
