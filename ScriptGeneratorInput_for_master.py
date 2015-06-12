@@ -16,13 +16,13 @@ authors = ['Gideon Grossman', 'Alec Stewart']   #e.g. ['John Smith', 'Mohamed Gu
 states  = ['State_1', 'State_2', 'State_3']     #e.g. ['Sleep', 'Calibration', 'Normal_Operation']
 
 # Enter the path and filename of the text file containing the transition events
-events_file_path = "C:/Users/Velocitek/Documents/Gideon/Code/Style-Scripts/State-Machine-Script-Generator"
-events_filename = "Events_for_master.txt"
+events_and_functions_file_path = "C:/Users/Velocitek/Documents/Gideon/Code/Style-Scripts/State-Machine-Script-Generator"
+events_and_functions_filename = "Events_for_master.txt"
 
 # Header files to include
 includes = ['main.h', 'avr_compiler.h', 'shiftLcd.h', 'events.h']
 
 # Generate the .c and .h files with the parameters defined above and in the events .txt file
-script_generator_object = script_generator(events_file_path, events_filename, c_file_path, c_filename, year, authors, states, includes)
+script_generator_object = script_generator(events_and_functions_file_path, events_and_functions_filename, c_file_path, c_filename, year, authors, states, includes)
 script_generator_object.GenerateScript()
 

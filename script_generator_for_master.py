@@ -37,21 +37,40 @@ class script_generator:
         
     def CreateDictionaryOfDuringFunctions(self):
         events_file = open('%s/%s' %(self.events_path, self.events_filename), 'r')
-        events_file_content = events_file.readlines()   
+        events_file_lines = events_file.readlines()  
+        events_file.close()
+        num_lines = open('%s/%s' %(self.events_path, self.events_filename), 'r').read().count("\n") + 1 
         self.during_functions = {}
         for state in self.states:
             self.during_functions[state] = []
-            for line in events_file_content:
-                if line.startswith('During ' + state):
-                    for line in events_file_content:
-                        if not line.startswith('During ' + state):   
-                            self.during_functions[state].append(line)
+            i = 0
+            while (i < num_lines):
+                if events_file_lines[i].startswith('During ' + state):
+                    j = 1
+                    while not i + j == num_lines and not events_file_lines[i+j].startswith('During'):
+                        self.during_functions[state].append(events_file_lines[i+j])
+                        j += 1
+                i += 1
+            
+        
+        #for state in self.states:
+        #    self.during_functions[state] = []
+        #    for line in events_file_content:
+        #        if line.startswith('During ' + state):
+        #            for line in events_file_content:
+        #                if not line.startswith('During ' + state):   
+        #                    self.during_functions[state].append(line)
+        events_file.close()
                             
     def PrintPrivateDuringFunctions(self, h):
         h.write('// Private During Functions ' + '-' * 52 + '\n')
+        self.CreateDictionaryOfDuringFunctions()
         for state in self.states:
             h.write('static void During' + CapitalizeFirstLettersRemoveUnderscores(state) + '(Events event)\n')
-            h.write('{\n\n  if (event == EV_ENTRY)\n  {\n\n  }\n')
+            h.write('{\n\n  if (event == EV_ENTRY)\n  {\n')
+            for function in self.during_functions[state]:
+                h.write('    ' + function)
+            h.write('\n  }\n')
             h.write('  else if (event == EV_EXIT)\n  {\n\n  }\n')
             h.write('  else\n  {\n\n  }\n}\n\n')
 
@@ -170,7 +189,7 @@ class script_generator:
         g.write('  Run' + CapitalizeFirstLettersRemoveUnderscores(self.filename) + 'SM(EV_ENTRY);\n}\n\n')
         g.write(CapitalizeFirstLettersRemoveUnderscores(self.filename) + 'States Query' + CapitalizeFirstLettersRemoveUnderscores(self.filename) + 'SM(void)\n')
         g.write('{\n  return current_' + self.filename + '_state_;\n}\n\n\n')
-        PrintPrivateDuringFunctions(g, self.states)
+        self.PrintPrivateDuringFunctions(g)
         g.close()
         return
 

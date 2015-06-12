@@ -163,6 +163,10 @@ static void DuringState1(Events event)
 
   if (event == EV_ENTRY)
   {
+    ClearLcdAll();
+    SetDampingNumber(1);
+    UpdateLcd();
+    
 
   }
   else if (event == EV_EXIT)
@@ -180,6 +184,10 @@ static void DuringState2(Events event)
 
   if (event == EV_ENTRY)
   {
+    ClearLcdAll();
+    SetDampingNumber(2);
+    UpdateLcd();
+    
 
   }
   else if (event == EV_EXIT)
@@ -197,7 +205,9 @@ static void DuringState3(Events event)
 
   if (event == EV_ENTRY)
   {
-
+    ClearLcdAll();
+    SetDampingNumber(3);
+    UpdateLcd();
   }
   else if (event == EV_EXIT)
   {
