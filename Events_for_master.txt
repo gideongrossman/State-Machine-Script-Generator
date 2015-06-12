@@ -1,6 +1,23 @@
-State_1, change_to_state_2, State_2
-State_1, change_to_state_3, State_3
-State_2, change_to_state_1, State_1
-State_2, change_to_state_3, State_3
-State_3, change_to_state_1, State_1
-State_3, change_to_state_2, State_2
+Event State_1, change_to_state_2, StatEvent e_2
+Event State_1, change_to_state_3, State_3
+Event State_2, change_to_state_1, State_1
+Event State_2, change_to_state_3, State_3
+Event State_3, change_to_state_1, State_1
+Event State_3, change_to_state_2, State_2
+
+#What to do during a state
+
+During State_1:
+ClearLcdAll();
+SetDampingNumber(1);
+UpdateLcd();
+
+During State_2:
+ClearLcdAll();
+SetDampingNumber(2);
+UpdateLcd();
+
+During State_3:
+ClearLcdAll();
+SetDampingNumber(3);
+UpdateLcd();

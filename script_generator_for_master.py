@@ -15,14 +15,6 @@ def CapitalizeFirstLettersRemoveUnderscores(word_to_capitalize):
         #    x = 4
         index += 1
     return new_word
-    
-def PrintPrivateDuringFunctions(h, states):
-    h.write('// Private During Functions ' + '-' * 52 + '\n')
-    for state in states:
-        h.write('static void During' + CapitalizeFirstLettersRemoveUnderscores(state) + '(Events event)\n')
-        h.write('{\n\n  if (event == EV_ENTRY)\n  {\n\n  }\n')
-        h.write('  else if (event == EV_EXIT)\n  {\n\n  }\n')
-        h.write('  else\n  {\n\n  }\n}\n\n')
         
 class script_generator:
     
@@ -37,11 +29,31 @@ class script_generator:
         for state in self.states:
             self.events[state] = []
             for line in events_file_content:
-                if line.startswith(state):
+                if line.startswith('Event ' + state):
                     split_line = re.split(', |\n', line)
                     self.events[state].append([split_line[1], split_line[2]])
         events_file.close()
         return self.events
+        
+    def CreateDictionaryOfDuringFunctions(self):
+        events_file = open('%s/%s' %(self.events_path, self.events_filename), 'r')
+        events_file_content = events_file.readlines()   
+        self.during_functions = {}
+        for state in self.states:
+            self.during_functions[state] = []
+            for line in events_file_content:
+                if line.startswith('During ' + state):
+                    for line in events_file_content:
+                        if not line.startswith('During ' + state):   
+                            self.during_functions[state].append(line)
+                            
+    def PrintPrivateDuringFunctions(self, h):
+        h.write('// Private During Functions ' + '-' * 52 + '\n')
+        for state in self.states:
+            h.write('static void During' + CapitalizeFirstLettersRemoveUnderscores(state) + '(Events event)\n')
+            h.write('{\n\n  if (event == EV_ENTRY)\n  {\n\n  }\n')
+            h.write('  else if (event == EV_EXIT)\n  {\n\n  }\n')
+            h.write('  else\n  {\n\n  }\n}\n\n')
 
     def __init__(self, events_path, events_filename, c_path, c_filename, year, authors, states, includes):
         self.events_path = events_path

@@ -41,7 +41,7 @@ Events RunMasterSM(Events current_event)
         switch (current_event)
         {
           case EV_CHANGE_TO_STATE_2 :
-            nextState = STATE_2;
+            nextState = STATEVENT E_2;
             break;
 
           case EV_CHANGE_TO_STATE_3 :
