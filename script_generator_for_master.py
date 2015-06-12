@@ -59,7 +59,7 @@ class script_generator:
         if self.events[state]:
             for event in self.events[state]:
                 implementation_file.write('          case EV_' + event[0].upper() + ' :\n')
-                implementation_file.write('            nextState = ' + event[1].upper() + ';\n            break;\n\n')
+                implementation_file.write('            nextState = ' + event[1].upper() + '_STATE;\n            break;\n\n')
         else:
             implementation_file.write('        }\n')
         

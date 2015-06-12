@@ -1,6 +1,6 @@
-State_1, change_to_state_2, State_2
-State_1, change_to_state_3, State_3
-State_2, change_to_state_1, State_1
-State_2, change_to_state_3, State_3
-State_3, change_to_state_1, State_1
-State_3, change_to_state_2, State_2
+State_1, EV_BUTTON_PWR_RELEASED, State_2
+State_1, EV_BUTTON_PLUS_ONE_RELEASED, State_3
+State_2, EV_BUTTON_RESET_PRESSED, State_1
+State_2, EV_BUTTON_PLUS_ONE_PRESSED, State_3
+State_3, EV_BUTTON_RESET_PRESSED, State_1
+State_3, EV_BUTTON_PWR_RELEASED, State_2

@@ -40,12 +40,12 @@ uint8_t RunMasterSM(uint8_t current_event)
       {
         switch (current_event)
         {
-          case EV_CHANGE_TO_STATE_2 :
-            nextState = STATE_2;
+          case EV_EV_BUTTON_PWR_RELEASED :
+            nextState = STATE_2_STATE;
             break;
 
-          case EV_CHANGE_TO_STATE_3 :
-            nextState = STATE_3;
+          case EV_EV_BUTTON_PLUS_ONE_RELEASED :
+            nextState = STATE_3_STATE;
             break;
 
           default:
@@ -62,12 +62,12 @@ uint8_t RunMasterSM(uint8_t current_event)
       {
         switch (current_event)
         {
-          case EV_CHANGE_TO_STATE_1 :
-            nextState = STATE_1;
+          case EV_EV_BUTTON_RESET_PRESSED :
+            nextState = STATE_1_STATE;
             break;
 
-          case EV_CHANGE_TO_STATE_3 :
-            nextState = STATE_3;
+          case EV_EV_BUTTON_PLUS_ONE_PRESSED :
+            nextState = STATE_3_STATE;
             break;
 
           default:
@@ -84,12 +84,12 @@ uint8_t RunMasterSM(uint8_t current_event)
       {
         switch (current_event)
         {
-          case EV_CHANGE_TO_STATE_1 :
-            nextState = STATE_1;
+          case EV_EV_BUTTON_RESET_PRESSED :
+            nextState = STATE_1_STATE;
             break;
 
-          case EV_CHANGE_TO_STATE_2 :
-            nextState = STATE_2;
+          case EV_EV_BUTTON_PWR_RELEASED :
+            nextState = STATE_2_STATE;
             break;
 
           default:
