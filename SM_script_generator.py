@@ -1,4 +1,3 @@
-#from enum import Enum
 import re
 
 
@@ -24,7 +23,7 @@ def PrintPrivateDuringFunctions(h, states):
         h.write('  else if (event == EV_EXIT)\n  {\n\n  }\n')
         h.write('  else\n  {\n\n  }\n}\n\n')
         
-class script_generator:
+class SM_script_generator:
     
     # Creates a dictionary containing all transition events
     # The keys are the source states
