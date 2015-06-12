@@ -6,8 +6,6 @@
 #ifndef SMMASTER_H
 #define SMMASTER_H
 
-#include "events.h"
-
 typedef enum
 {
 STATE_1_STATE,

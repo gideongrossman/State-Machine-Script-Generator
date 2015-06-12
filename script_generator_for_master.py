@@ -59,7 +59,7 @@ class script_generator:
         if self.events[state]:
             for event in self.events[state]:
                 implementation_file.write('          case EV_' + event[0].upper() + ' :\n')
-                implementation_file.write('            nextState = ' + event[1].upper() + '_STATE;\n            break;\n\n')
+                implementation_file.write('            next_state = ' + event[1].upper() + '_STATE;\n            break;\n\n')
         else:
             implementation_file.write('        }\n')
         
@@ -83,7 +83,7 @@ class script_generator:
         capitalized_filename_no_underscores = CapitalizeFirstLettersRemoveUnderscores(self.filename)
         f.write(boilerplate_comments)
         f.write(header_guard)
-        f.write('#include "events.h"\n\n')
+        #f.write('#include "events.h"\n\n')
         f.write(enum_type_definition)
         f.write(capitalized_filename_no_underscores + 'States;\n\n')
         f.write('uint8_t Run' + capitalized_filename_no_underscores + 'SM(uint8_t current_event);\n')
