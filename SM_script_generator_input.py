@@ -12,7 +12,7 @@ from sm_script_generator import *
 reload(a)
 from sm_script_generator import *
 
-# Module variables -------------------------------------------------------------
+# Module variables -----------------------------------------------------------
 
 # Enter the path where you'd like to create .c and .h files
 # e.g. 'C:\Users\Velocitek\Documents\Gideon\Code\Style-Scripts
@@ -33,7 +33,8 @@ authors = ['Gideon Grossman', 'Alec Stewart']
 states  = ['State_1', 'State_2', 'State_3']     
 #e.g. ['Sleep', 'Calibration', 'Normal_Operation']
 
-# Enter the path and filename of the text file containing the transition events
+# Enter the path and filename of the 
+# text file containing the transition events
 events_file_path = 'C:/Users/Velocitek/Documents/Gideon/\
 Code/Style-Scripts/State-Machine-Script-Generator'
 # e.g. events_file_path = 'C:/Users/Velocitek/Documents/Gideon
@@ -45,7 +46,7 @@ events_filename = 'Events_for_master.txt'
 includes = ['main.h', 'avr_compiler.h', 'shiftLcd.h', 'SMevents.h'] 
 #e.g. includes = ['main.h', 'avr_compiler.h', 'shiftLcd.h', 'SMevents.h']
 
-# Module Code ------------------------------------------------------------------
+# Module Code ----------------------------------------------------------------
 # Generates the .c and .h files with the parameters defined above 
 # and in the events .txt file
 script_generator_object = SM_script_generator(events_file_path,
