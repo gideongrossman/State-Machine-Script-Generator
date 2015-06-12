@@ -1,3 +1,9 @@
+# Copyright (c) 2015 Velocitek Inc. All rights reserved.
+# Author(s): Gideon Grossman
+#
+# Please follow the Velocitek C Style Guide when maintaining this code.
+# http://www.velocitek.com/style-guide/c_style_guide.xml
+
 import re
 
 
@@ -18,7 +24,8 @@ def CapitalizeFirstLettersRemoveUnderscores(word_to_capitalize):
 def PrintPrivateDuringFunctions(h, states):
     h.write('// Private During Functions ' + '-' * 52 + '\n')
     for state in states:
-        h.write('static void During' + CapitalizeFirstLettersRemoveUnderscores(state) + '(uint8_t event)\n')
+        h.write('static void During' + 
+CapitalizeFirstLettersRemoveUnderscores(state) + '(uint8_t event)\n')
         h.write('{\n\n  if (event == EV_ENTRY)\n  {\n\n  }\n')
         h.write('  else if (event == EV_EXIT)\n  {\n\n  }\n')
         h.write('  else\n  {\n\n  }\n}\n\n')
@@ -27,9 +34,11 @@ class SM_script_generator:
     
     # Creates a dictionary containing all transition events
     # The keys are the source states
-    # Each value is an array of subarrays. Each subarray has two elements: [transition event, destination state]
+    # Each value is an array of subarrays. 
+    # Each subarray has two elements: [transition event, destination state]
     def CreateDictionaryOfTransitionEvents(self):
-        events_file = open('%s/%s' %(self.events_path, self.events_filename) ,'r')
+        events_file = open('%s/%s' %(self.events_path, 
+                            self.events_filename) ,'r')
         events_file_content = events_file.readlines()
 
         self.events = {}
@@ -42,7 +51,8 @@ class SM_script_generator:
         events_file.close()
         return self.events
 
-    def __init__(self, events_path, events_filename, c_path, c_filename, year, authors, states, includes):
+    def __init__(self, events_path, events_filename, c_path, 
+                c_filename, year, authors, states, includes):
         self.events_path = events_path
         self.events_filename = events_filename
         self.path = c_path
@@ -57,20 +67,23 @@ class SM_script_generator:
     def PrintTransitionStatements(self, state, implementation_file):
         if self.events[state]:
             for event in self.events[state]:
-                implementation_file.write('          case EV_' + event[0].upper() + ' :\n')
-                implementation_file.write('            next_state = ' + event[1].upper() + '_STATE;\n            break;\n\n')
+                implementation_file.write('          case EV_' + 
+                                        event[0].upper() + ' :\n')
+                implementation_file.write('            next_state = ' + 
+                                        event[1].upper() + 
+                                        '_STATE;\n            break;\n\n')
         else:
             implementation_file.write('        }\n')
         
     def CreateHeaderFile(self):
-        f = open('%s/SM%s.h' %(self.path, self.filename) ,'w')
+        f = open('%s/sm_%s.h' %(self.path, self.filename) ,'w')
         capitalized_states = []
         for state in self.states:
             capitalized_states.append(state.upper())
         boilerplate_comments = '// Copyright (c) '+self.year+' Velocitek Inc. All rights reserved.\n\
-    //\n\
-    // Please follow the Velocitek C Style Guide when maintaining this code.\n\
-    // http://www.velocitek.com/style-guide/c_style_guide.xml\n\n'
+//\n\
+// Please follow the Velocitek C Style Guide when maintaining this code.\n\
+// http://www.velocitek.com/style-guide/c_style_guide.xml\n\n'
         
         header_guard = '#ifndef SM%s_H\n#define SM%s_H\n\n' %(self.filename.upper(), self.filename.upper())
         
@@ -92,7 +105,7 @@ class SM_script_generator:
         f.close()
     
     def CreateImplementationFile(self):
-        g = open('%s/SM%s.c' %(self.path, self.filename), 'w')
+        g = open('%s/sm_%s.c' %(self.path, self.filename), 'w')
         
         authors_listed = ''
         index =  0
@@ -115,7 +128,7 @@ class SM_script_generator:
         for include in self.includes:
             g.write('#include \"' + include + '\"\n')
         g.write('\n')
-        g.write('#include "SM' + self.filename + '.h"\n\n')
+        g.write('#include "sm_' + self.filename + '.h"\n\n')
         
         g.write('// Module Constants ' + '-' * 60 + '\n\n\n')
         
